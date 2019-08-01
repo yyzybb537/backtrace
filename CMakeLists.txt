@@ -6,7 +6,8 @@ set(TARGET ${CMAKE_PROJECT_NAME})
 # flags
 if (CMAKE_BUILD_TYPE)
 else()
-    set(CMAKE_BUILD_TYPE RELEASE)
+    #set(CMAKE_BUILD_TYPE RELEASE)
+    set(CMAKE_BUILD_TYPE DEBUG)
 endif()
 
 message("------------ Options -------------")
@@ -25,5 +26,9 @@ message("------------------------------------")
 aux_source_directory(${PROJECT_SOURCE_DIR} LIST_SRC)
 add_library(${TARGET} STATIC ${LIST_SRC})
 
-install(TARGETS ${STATIC_T} LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
-install(FILES ${PROJECT_SOURCE_DIR}/backtrace.h DESTINATION "include/backtrace")
+install(TARGETS ${TARGET} LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
+install(FILES ${PROJECT_SOURCE_DIR}/backtrace.h DESTINATION "include/")
+
+add_executable(test ${PROJECT_SOURCE_DIR}/test/test.cpp)
+include_directories(${PROJECT_SOURCE_DIR})
+target_link_libraries(test -Wl,--whole-archive backtrace -Wl,--no-whole-archive unwind)
