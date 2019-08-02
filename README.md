@@ -58,10 +58,13 @@ int main() {
 * 链接时需要链接backtrace和unwind
 
 ```
-  $ g++ -std=c++11 -fno-inline -lbacktrace -lunwind test.cpp
+  $ g++ -g -std=c++11 -fno-inline -lbacktrace -lunwind test.cpp -o test
 ```
 
-#### 输出
+#### 输出&定位
+
+* 上述demo会输出如下内容：
+
 ```
 Exception Info:MyException
 Exception Backtrace:
@@ -71,4 +74,12 @@ Exception Backtrace:
 0x000000000040155b <main+0xe>
 0x00007f77b12a0830 <__libc_start_main+0xf0>
 0x0000000000401449 <_start+0x29>
+```
+
+* 定位到具体源码文件&行号：
+
+```
+  $ addr2line -Cif -e test 0x000000000040153b
+  foo()
+  /root/gits/backtrace/test/test.cpp:14
 ```
