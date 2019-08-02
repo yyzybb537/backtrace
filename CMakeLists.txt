@@ -31,4 +31,4 @@ install(FILES ${PROJECT_SOURCE_DIR}/backtrace.h DESTINATION "include/")
 
 add_executable(test ${PROJECT_SOURCE_DIR}/test/test.cpp)
 include_directories(${PROJECT_SOURCE_DIR})
-target_link_libraries(test -Wl,--whole-archive backtrace -Wl,--no-whole-archive unwind)
+target_link_libraries(test -fno-inline backtrace unwind)
