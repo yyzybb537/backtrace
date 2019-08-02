@@ -60,3 +60,15 @@ int main() {
 ```
   $ g++ -std=c++11 -fno-inline -lbacktrace -lunwind test.cpp
 ```
+
+#### 输出
+```
+Exception Info:MyException
+Exception Backtrace:
+0x0000000000401749 <std::exception::exception()+0x11>
+0x00000000004016a6 <MyException::MyException()+0x18>
+0x000000000040153b <foo()+0x25>
+0x000000000040155b <main+0xe>
+0x00007f77b12a0830 <__libc_start_main+0xf0>
+0x0000000000401449 <_start+0x29>
+```
